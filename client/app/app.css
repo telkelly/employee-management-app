@@ -15,7 +15,7 @@ body {
   }
 }
 
-
+/*Mobile-screen*/
 .container{
   display: flex;
   flex-direction: column;
@@ -52,4 +52,130 @@ body {
   letter-spacing: 2.5px;
   justify-self: end;
   text-decoration: underline;
+}
+
+/*login.tsx*/
+.login-form {
+  max-width: 100%;
+  height: 100vh;
+  padding: 80px 30px 0;
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  font-family: sans-serif;
+  letter-spacing: 1.6px;
+}
+
+.login-title {
+  text-align: left;
+  margin-bottom: 20px;
+  font-size: 2rem;
+  letter-spacing: 2px;
+}
+
+.login-subtitle{
+  padding-bottom: 40px;
+  font-size: 1.4rem;
+  letter-spacing: 2px;
+}
+
+.form-group {
+  margin-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  margin-bottom: 6px;
+  font-weight: 500;
+}
+
+.form-input {
+  padding: 10px 12px;
+  font-size: 16px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: rgba(138, 191, 99, 0.24);
+}
+
+.form-options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  font-size: 14px;
+}
+
+.remember {
+  display: flex;
+  align-items: center;
+}
+
+.forgot-link {
+  text-decoration: none;
+  color: rgba(128, 172, 95, 0.72);
+}
+
+.forgot-link:hover {
+  text-decoration: underline;
+}
+
+.login-button {
+  width: 100%;
+  padding: 10px;
+  background: rgba(128, 172, 95, 0.72);
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.login-button:hover {
+  background: rgba(76, 168, 81, 0.87);
+}
+
+.login-message {
+  text-align: center;
+  margin-top: 10px;
+  color: #9c3535;
+}
+
+.login-footer {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 14px;
+}
+
+.login-footer a {
+  color: rgba(128, 172, 95, 0.72);
+  text-decoration: none;
+}
+
+.login-footer a:hover {
+  text-decoration: underline;
+}
+
+.social-text {
+  margin: 12px 0 8px;
+}
+
+.social-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.social-btn {
+  width: 36px;
+  height: 36px;
+  border: 1px solid #ccc;
+  border-radius: 50%;
+  background: #f4f4f4;
+  font-size: 16px;
+  cursor: pointer;
 }
