@@ -1,9 +1,12 @@
 import {useState} from 'react';
+import {useNavigate} from "react-router-dom";
 import API from '../api/axios';
 
 export default function Login() {
     const [form, setForm] = useState({email: '', password: ''});
     const [message, setMessage] = useState('');
+
+    const navigate = useNavigate();
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setForm({...form, [e.target.name]: e.target.value});
@@ -13,8 +16,11 @@ export default function Login() {
         e.preventDefault();
         try {
             const res = await API.post('/auth/login', form);
+            console.log(res);
             localStorage.setItem('token', res.data.token);
+            localStorage.setItem('role', res.data.user.role);
             setMessage('Login successful!');
+            navigate('/dashboard');
         } catch (err: any) {
             setMessage(err.response?.data?.error || 'Login failed');
         }
@@ -64,7 +70,7 @@ export default function Login() {
             {message && <p className="login-message">{message}</p>}
 
             <div className="login-footer">
-                <p>Not a member? <a href="#">Register</a></p>
+                <p>Not a member? <a href="/register">Register</a></p>
                 <p className="social-text">or sign in with:</p>
                 <div className="social-buttons">
                     <button type="button" className="social-btn">G</button>
