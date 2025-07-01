@@ -12,7 +12,7 @@ router.post('/:groupId', verifyToken, async (req, res) => {
             title,
             description,
             status,
-            dueData,
+            dueDate,
             groupId: req.params.groupId,
             assignedTo: assignedTo || null,
         })
@@ -26,7 +26,7 @@ router.post('/:groupId', verifyToken, async (req, res) => {
 // Get tasks
 router.get('/:groupId', verifyToken, async (req, res) => {
     try {
-        const tasks = await Task.find({groupId: req.body.groupId})
+        const tasks = await Task.find({groupId: req.params.groupId})
         res.json({tasks})
     } catch (err) {
         res.status(500).json({error: 'Failed to fetch tasks'});

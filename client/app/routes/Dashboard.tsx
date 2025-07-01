@@ -1,6 +1,7 @@
 import {useEffect, useState} from 'react';
 import API from '../api/axios';
 import {useNavigate} from "react-router-dom";
+import MyGroups from "~/routes/MyGroups";
 
 export default function Dashboard() {
     const [user, setUser] = useState({name: "", role: ""});
@@ -35,18 +36,28 @@ export default function Dashboard() {
         fetchUser();
     }, []);
 
+    const handleLogout= ()=>{
+        localStorage.removeItem('token');
+        localStorage.removeItem('role')
+        navigate('/login');
+    }
+
     if (loading) return <p>Loading...</p>;
 
     return (
         <div className="dashboard">
+            <button onClick={handleLogout} className="logout-button">
+                Logout
+            </button>
             <h1>Welcome, {user.name}</h1>
-            <h3>Role: {user.role}</h3>
 
             {user.role === "admin" ? (
                 <div>
                     <h2>Admin Panel</h2>
                     <ul>
                         <li>Create & manage groups</li>
+                        <a href='/create'>Create it</a>
+                        <MyGroups/>
                         <li>Create & manage tasks</li>
                         <li>Edit schedule</li>
                     </ul>

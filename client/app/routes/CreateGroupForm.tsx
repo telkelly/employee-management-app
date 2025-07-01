@@ -42,7 +42,6 @@ export default function CreateGroupForm() {
             />
             <button type="submit">Create Group</button>
             {message && <p>{message}</p>}
-
         </form>
     );
 }

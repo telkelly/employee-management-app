@@ -4,4 +4,8 @@ export default [
     route("/", "./routes/home.tsx"),
     route("/login", "./routes/login.tsx"),
     route("/register", "./routes/register.tsx"),
+    route("/dashboard", "./routes/dashboard.tsx"),
+    route("/create", "./routes/creategroupform.tsx"),
+    route("/my-groups", "./routes/mygroups.tsx"),
+    route("/group/:groupId/tasks", "./routes/grouptasks.tsx"),
 ] satisfies RouteConfig;

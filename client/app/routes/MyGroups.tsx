@@ -1,5 +1,6 @@
 import {useEffect, useState} from 'react';
 import API from '../api/axios';
+import {Link} from "react-router-dom";
 
 export default function MyGroups() {
     const [groups, setGroups] = useState([]);
@@ -18,6 +19,10 @@ export default function MyGroups() {
 
         fetchGroups();
     }, []);
+
+    const handleGroupClick =()=>{
+
+    }
 
     return (
         <div>
@@ -41,6 +46,7 @@ export default function MyGroups() {
                         {group.members.map((member:any) => (
                             <h3 className="font-semibold">{member.name}</h3>
                         ))}
+                        <Link to={`/group/${group._id}/tasks`}><button onClick={handleGroupClick}>See tasks</button></Link>
                     </li>
                 ))}
             </ul>
