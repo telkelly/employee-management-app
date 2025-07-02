@@ -38,4 +38,25 @@ router.get('/my-groups', verifyToken, async (req, res) => {
     }
 });
 
+router.post('/join/:inviteCode', verifyToken, async (req, res) => {
+    try {
+        const user = await User.findById(req.user.userId);
+        if(user.groupId){
+            return res.status(401).json({error: 'You are already in the group.'});
+        }
+
+        const group = await Group.findOne({inviteCode: req.params.inviteCode})
+        if(!group){
+            return res.status(401).json({error: 'Invalid invite code.'});
+        }
+
+        user.groupId = group._id;
+        await user.save();
+
+        res.json({message: 'Group joined successfully'}, group);
+    }catch (error) {
+        res.status(500).json({ error: 'Failed to join the group' });
+    }
+})
+
 export default router;
