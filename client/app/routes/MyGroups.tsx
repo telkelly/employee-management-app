@@ -3,26 +3,23 @@ import API from '../api/axios';
 import {Link} from "react-router-dom";
 
 export default function MyGroups() {
-    const [groups, setGroups] = useState([]);
+    const [groups, setGroups] = useState<any[]>([]);
 
     useEffect(() => {
         const fetchGroups = async () => {
-            const token = localStorage.getItem('token');
-            const res = await API.get('/group/my-groups', {
-                headers: {Authorization: `Bearer ${token}`},
-            });
-            console.log("Fetched groups:", res.data.groups);
-            console.log("Is array:", Array.isArray(res.data.groups));
-            setGroups(res.data.groups);
-
+            try {
+                const token = localStorage.getItem('token');
+                const res = await API.get('/group/my-groups', {
+                    headers: {Authorization: `Bearer ${token}`},
+                });
+                setGroups(res.data.groups);
+            }catch (err){
+                console.log('Failed to load', err);
+            }
         };
 
         fetchGroups();
     }, []);
-
-    const handleGroupClick =()=>{
-
-    }
 
     return (
         <div>
@@ -43,10 +40,12 @@ export default function MyGroups() {
                         >
                             Copy Invite Link
                         </button>
-                        {group.members.map((member:any) => (
+                        {group.members.map((member: any) => (
                             <h3 className="font-semibold">{member.name}</h3>
                         ))}
-                        <Link to={`/group/${group._id}/tasks`}><button onClick={handleGroupClick}>See tasks</button></Link>
+                        <Link to={`/group/${group._id}/tasks`}>
+                            <button>See tasks</button>
+                        </Link>
                     </li>
                 ))}
             </ul>
