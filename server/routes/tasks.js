@@ -7,7 +7,7 @@ const router = express.Router();
 // Create task
 router.post('/:groupId', verifyToken, async (req, res) => {
     try {
-        const {title, description, status, dueData, assignedTo} = req.body;
+        const {title, description, status, dueDate, assignedTo} = req.body;
         const task = new Task({
             title,
             description,

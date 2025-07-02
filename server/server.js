@@ -23,7 +23,7 @@ app.use(express.json());
 app.use('/api/auth', authRoutes);
 app.use('/api/private', privateRoutes);
 app.use('/api/group', groupRoutes);
-app.use('api/tasks', taskRoutes)
+app.use('/api/tasks', taskRoutes)
 
 
 const PORT = process.env.PORT || 5000;
