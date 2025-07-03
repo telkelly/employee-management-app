@@ -1,7 +1,6 @@
-// Join group via invite
-
 import express from 'express';
 import Group from "../models/Group.js";
+import User from "../models/User.js";
 import {verifyToken} from "../middleware/authMiddleware.js";
 import {generateInviteCode} from "../utils/generateInviteCode.js";
 
@@ -53,7 +52,10 @@ router.post('/join/:inviteCode', verifyToken, async (req, res) => {
         user.groupId = group._id;
         await user.save();
 
-        res.json({message: 'Group joined successfully'}, group);
+        group.members.push(user._id);
+        await group.save()
+
+        res.json({message: 'Group joined successfully', group});
     }catch (error) {
         res.status(500).json({ error: 'Failed to join the group' });
     }
