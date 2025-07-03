@@ -7,6 +7,6 @@ export default [
     route("/dashboard", "./routes/dashboard.tsx"),
     route("/create", "./routes/creategroupform.tsx"),
     route("/my-groups", "./routes/mygroups.tsx"),
-    route("/group/:groupId/tasks", "./routes/grouptasks.tsx"),
+    route("/group/:groups/tasks", "./routes/grouptasks.tsx"),
     route("/group/join/:inviteCode", "./routes/joingroup.tsx"),
 ] satisfies RouteConfig;
