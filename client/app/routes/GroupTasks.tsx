@@ -1,5 +1,5 @@
 import {useParams} from "react-router-dom";
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import API from "../api/axios";
 
 export default function GroupTasks() {
@@ -9,18 +9,18 @@ export default function GroupTasks() {
 
     const token = localStorage.getItem("token");
 
-    useEffect(() => {
-        const fetchTasks = async () => {
-            try {
-                const res = await API.get(`/tasks/${groupId}`,
-                    {headers: {Authorization: `Bearer ${token}`}})
-                console.log(res.data.tasks)
-                setTasks(res.data.tasks);
-            } catch (err) {
-                console.log('Failed to load', err);
-            }
-        };
+    const fetchTasks = async () => {
+        try {
+            const res = await API.get(`/tasks/${groupId}`,
+                {headers: {Authorization: `Bearer ${token}`}})
+            console.log(res.data.tasks)
+            setTasks(res.data.tasks);
+        } catch (err) {
+            console.log('Failed to load', err);
+        }
+    };
 
+    useEffect(() => {
         fetchTasks();
     }, [groupId])
 
@@ -40,8 +40,18 @@ export default function GroupTasks() {
         } catch (err) {
             console.log(err)
         }
-
     }
+
+    const handleDelete = async (taskId: string) => {
+        try {
+            await API.delete(`/tasks/${taskId}`, {
+                headers: {Authorization: `Bearer ${token}`},
+            });
+            fetchTasks(); // refresh tasks after delete
+        } catch (err) {
+            console.log("Failed to delete", err);
+        }
+    };
 
     return (
         <div>
@@ -63,6 +73,12 @@ export default function GroupTasks() {
                         <h3>{task.title}</h3>
                         <p>{task.description}</p>
                         <p>Due: {task.dueDate ? new Date(task.dueDate).toLocaleDateString() : "No deadline"}</p>
+                        <button
+                            onClick={() => handleDelete(task._id)}
+                            className="text-red-600 underline"
+                        >
+                            Delete Task
+                        </button>
                     </li>
                 )))}
             </ul>

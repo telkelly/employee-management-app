@@ -5,7 +5,7 @@ const userSchema = new mongoose.Schema({
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
     role: { type: String, enum: ['admin', 'employee'], required: true },
-    groups: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Group', default: null }],
+    groups: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Group'}],
 }, { timestamps: true });
 
 const User = mongoose.model('User', userSchema);

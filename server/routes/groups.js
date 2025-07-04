@@ -49,7 +49,7 @@ router.post('/join/:inviteCode', verifyToken, async (req, res) => {
             return res.status(400).json({ error: 'Already a member of this group.' });
         }
 
-        user.groups = group._id;
+        user.groups.push(group._id);
         await user.save();
 
         group.members.push(user._id);
